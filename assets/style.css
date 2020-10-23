@@ -1,0 +1,72 @@
+.jumbotron {
+    text-align: center;
+    background-color: skyblue;
+}
+
+.hide {
+        display: none;
+}
+
+#forecast {
+    margin-top: 100px;
+
+}
+
+#day1 {
+    background-color: slateblue;
+    margin: 20px;
+}
+
+#day2 {
+    background-color: slateblue;
+    margin: 20px;
+}
+
+#day3 {
+    background-color: slateblue;
+    margin: 20px;
+}
+
+#day4 {
+    background-color: slateblue;
+    margin: 20px;
+}
+
+#day5 {
+    background-color: slateblue;
+    margin: 20px;
+}
+
+.list-group li{
+    list-style: none;
+    text-align: center;
+    border: 1px solid black;
+    margin: 2px;
+}
+
+.list-group li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.list-group li a:hover {
+    text-decoration: none;
+    background-color: cyan;
+}
+
+#searchButton:hover {
+background-color: cyan;
+}
+
+.severe {
+    background-color: red;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.favorable {
+    background-color: green;
+}
