@@ -79,5 +79,42 @@ $(document).ready(function () {
     });
   }
 
+  //API for the 5-day forecast.
+function fiveDayForecast(lat, lon) {
+  var query = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
+  $.ajax({
+    url: query,
+    method: "GET"
+  }).then(function (response) {
+    console.log(response);
+    forecastHeader.classList.remove("hide");
+    day1.classList.remove("hide");
+    day2.classList.remove("hide");
+    day3.classList.remove("hide");
+    day4.classList.remove("hide");
+    day5.classList.remove("hide");
+    date1.textContent = moment().add(1, 'days').format('L');
+    date2.textContent = moment().add(2, 'days').format('L');
+    date3.textContent = moment().add(3, 'days').format('L');
+    date4.textContent = moment().add(4, 'days').format('L');
+    date5.textContent = moment().add(5, 'days').format('L');
+    icon1.src = "http://openweathermap.org/img/wn/" + response.daily[1].weather[0].icon + "@2x.png";
+    icon2.src = "http://openweathermap.org/img/wn/" + response.daily[2].weather[0].icon + "@2x.png";
+    icon3.src = "http://openweathermap.org/img/wn/" + response.daily[3].weather[0].icon + "@2x.png";
+    icon4.src = "http://openweathermap.org/img/wn/" + response.daily[4].weather[0].icon + "@2x.png";
+    icon5.src = "http://openweathermap.org/img/wn/" + response.daily[5].weather[0].icon + "@2x.png";
+    temp1.textContent = "Temp: " + response.daily[1].temp.day + "°F";
+    temp2.textContent = "Temp: " + response.daily[2].temp.day + "°F";
+    temp3.textContent = "Temp: " + response.daily[3].temp.day + "°F";
+    temp4.textContent = "Temp: " + response.daily[4].temp.day + "°F";
+    temp5.textContent = "Temp: " + response.daily[5].temp.day + "°F";
+    hum1.textContent = "Humidity " + response.daily[1].humidity + "%";
+    hum2.textContent = "Humidity " + response.daily[2].humidity + "%";
+    hum3.textContent = "Humidity " + response.daily[3].humidity + "%";
+    hum4.textContent = "Humidity " + response.daily[4].humidity + "%";
+    hum5.textContent = "Humidity " + response.daily[5].humidity + "%"; 
+  });
+}
+
 
 });
