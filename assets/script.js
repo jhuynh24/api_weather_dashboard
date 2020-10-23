@@ -37,7 +37,21 @@ $(document).ready(function () {
   var searchButton = document.getElementById("searchButton");
   var searchResults = document.getElementById("search-history");
   
-
+  // Callbacks for the functions to execute.
+  populateSearch();
+  defaultCity();
+  
+  //Code for the search bar functionality and local storage persistance
+  searchButton.addEventListener("click", function () {
+    var cityName = document.getElementById("city").value;
+    console.log(cityName);
+    cityWeather(cityName);
+    document.getElementById("city").value = "";
+    var searchHistory = localStorage.getItem('searchHistory') || '[]';
+    var listOfSearchHistory = [...JSON.parse(searchHistory), cityName];
+    localStorage.setItem("searchHistory", JSON.stringify(listOfSearchHistory));
+    populateSearch();
+  });
 
 //API for the current weather of the searched city.
   function cityWeather(city) {
