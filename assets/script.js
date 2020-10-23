@@ -53,6 +53,43 @@ $(document).ready(function () {
     populateSearch();
   });
 
+    //Code for population of the search history by accessing local storage.
+    function populateSearch () {
+      var searchHistory = localStorage.getItem('searchHistory') || '[]';
+      var listOfSearchHistory = [...JSON.parse(searchHistory)];
+      document.getElementById("city").value = "";
+      searchResults.innerHTML = "";
+      for (var i = listOfSearchHistory.length - 1; i >= 0; i --) {
+        var listElement = document.createElement("li");
+        var clickableElement = document.createElement("a");
+        clickableElement.href = "#";
+        clickableElement.textContent = listOfSearchHistory[i];
+        searchResults.appendChild(listElement);
+        listElement.appendChild(clickableElement);
+        clickableElement.onclick = search;
+      }
+    }
+  
+  
+    //Code for keeping the last city searched on the page after updating.
+    function defaultCity(){
+      var searchHistory = localStorage.getItem('searchHistory') || '[]';
+      var listOfSearchHistory = [...JSON.parse(searchHistory)];
+      lastSearch = listOfSearchHistory[listOfSearchHistory.length -1];
+      cityWeather(lastSearch);
+    }
+  
+  
+  //Adds the text to the front-end of the document for the search history.
+  function search(){
+    var cityName = this.textContent;
+    cityWeather(cityName);
+    var searchHistory = localStorage.getItem('searchHistory') || '[]';
+    var listOfSearchHistory = [...JSON.parse(searchHistory), cityName];
+    localStorage.setItem("searchHistory", JSON.stringify(listOfSearchHistory));
+    populateSearch();
+  }
+
 //API for the current weather of the searched city.
   function cityWeather(city) {
     var query = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
