@@ -57,5 +57,27 @@ $(document).ready(function () {
     });
   }
 
+  //API for the UV Index data for the searched city.
+  function cityUvIndex(lat, lon) {
+    var query = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
+    $.ajax({
+      url: query,
+      method: "GET"
+    }).then(function (response) {
+      console.log(response);
+      uvIndex.textContent = "UV Index: " + response.value;
+      uvIndex.classList = "";
+      if (response.value < 3) {
+        uvIndex.classList.add("favorable");
+      }
+      else if (response.value < 6) {
+        uvIndex.classList.add("moderate");
+      }
+      else {
+        uvIndex.classList.add("severe");
+      }
+    });
+  }
+
 
 });
